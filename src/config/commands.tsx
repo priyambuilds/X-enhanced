@@ -38,6 +38,6 @@ const executeCode = (code: string) => {
   }
 }
 
-export const flatCommandPaletteConfig: FlatCommandConfig = {
+export const commandPaletteConfig: FlatCommandConfig = {
 
 }

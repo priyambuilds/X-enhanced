@@ -1,5 +1,5 @@
 import { memo, lazy, Suspense } from 'react'
-import { commandPaletteConfig } from '@/example/config/commands'
+import { commandPaletteConfig } from '@/config/commands'
 import { searchItems } from '@/lib/search'
 import type { Command, PortalCommand, CategoryCommand } from '@/types/types'
 import type { CommandItemData } from './CommandList'
