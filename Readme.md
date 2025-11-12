@@ -102,3 +102,62 @@
 - Layout customization
 
 **Implementation:** All client-side configuration with `chrome.storage.sync`.
+
+**Perfect—here's the quick reference guide for what tech to use for each feature:**
+
+## MVP Features - Tech Stack
+
+### 1. User Search
+**Use:** REST v1.1 `/search/typeahead.json`
+- **Why:** Stable, zero maintenance, perfect for autocomplete
+- **Rate limit:** 180/15min (plenty)
+- **Returns:** 5-10 user suggestions instantly
+- **Complexity:** Easy
+
+### 2. Navigation Commands
+**Use:** Pure JavaScript (no API)
+- **Why:** Just URL redirects
+- **Implementation:** Hardcoded URL mappings
+- **Special case:** Get current user via `/1.1/account/verify_credentials.json` (REST v1.1)
+- **Complexity:** Super Easy
+
+### 3. Recent Searches
+**Use:** `chrome.storage.local` (no API)
+- **Why:** Client-side only, no X API needed
+- **Implementation:** Save/retrieve from browser storage
+- **Complexity:** Easy
+
+***
+
+## Quick Reference Table
+
+| Feature | Tech | Stability | Maintenance | When to Use |
+|---------|------|-----------|-------------|-------------|
+| **User search** | REST v1.1 | 🟢 Very Stable | Zero | Always |
+| **Navigation** | Pure JS | 🟢 Very Stable | Zero | Always |
+
+***
+
+## Decision Matrix
+
+### Use REST v1.1 When:
+✅ Feature exists in v1.1
+✅ You want zero maintenance
+✅ Building MVP
+✅ Stability is priority
+✅ Data available is "good enough"
+
+### Use GraphQL When:
+⚠️ Feature NOT in v1.1 (bookmarks, communities)
+⚠️ Need view counts/advanced metrics
+⚠️ Need full tweet history beyond 3,200
+⚠️ Building analytics features
+⚠️ Can commit to maintenance (query ID updates)
+
+### Use Local Storage When:
+✅ No backend data needed
+✅ User-specific settings/history
+✅ Caching results
+✅ Scheduled actions queue
+
+***
