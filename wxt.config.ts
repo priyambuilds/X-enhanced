@@ -24,10 +24,10 @@ export default defineConfig({
         default_popup: 'popup.html',
       },
 
-      options_ui: {
-        page: 'options.html',
-        open_in_tab: true,
-      },
+      // options_ui: {
+      //   page: 'options.html',
+      //   open_in_tab: true,
+      // },
 
       icons: {
         16: 'icon/16.png',

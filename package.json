@@ -28,8 +28,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@tailwindcss/postcss": "^4.1.17",
     "@types/chrome": "^0.1.28",
-    "@types/react": "^19.2.3",
+    "@types/react": "^19.2.4",
     "@types/react-dom": "^19.2.3",
     "@types/webextension-polyfill": "^0.12.4",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
