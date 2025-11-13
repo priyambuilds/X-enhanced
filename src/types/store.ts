@@ -24,7 +24,7 @@ import type {
   FuseConfig,
   VirtualizationConfig,
 } from './types'
-import { commandPaletteConfig } from '@/example/config/commands'
+import { commandPaletteConfig } from '@/config/commands'
 import {
   loadRecentCommands,
   saveRecentCommands,

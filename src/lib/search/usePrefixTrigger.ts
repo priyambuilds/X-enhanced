@@ -8,7 +8,7 @@
 
 import { useEffect, useRef } from 'react'
 import { useCommandContext } from '@/types/context'
-import { commandPaletteConfig } from '@/example/config/commands'
+import { commandPaletteConfig } from '@/config/commands'
 
 /**
  * @param query - Current search text (what user typed)
