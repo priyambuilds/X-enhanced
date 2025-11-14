@@ -66,11 +66,6 @@ export interface CategoryCommand extends BaseCommand {
 }
 
 /**
- * Legacy Navigable interface removed - use Command discriminated unions
- * @deprecated This interface has been removed. Use Command types instead.
- */
-
-/**
  * Portal context - API for portal components
  */
 export interface PortalContext {

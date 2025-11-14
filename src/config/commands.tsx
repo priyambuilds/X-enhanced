@@ -68,7 +68,6 @@ export function flattenCommands(config: FlatCommandConfig): Command[] {
 export const commandPaletteConfig: FlatCommandConfig = {
   actions: [
     // TWITTER/X ACTIONS
-
     {
       id: 'x-home',
       type: 'action',
@@ -76,12 +75,11 @@ export const commandPaletteConfig: FlatCommandConfig = {
       description: 'Go to X home timeline',
       icon: '🏠',
       keywords: ['twitter', 'x', 'home', 'feed', 'timeline'],
-      prefixes: ['xh'],
+      prefixes: ['!h'],
       execute: () => {
         window.location.href = 'https://x.com/home'
       },
     },
-
     {
       id: 'x-explore',
       type: 'action',
@@ -89,12 +87,11 @@ export const commandPaletteConfig: FlatCommandConfig = {
       description: 'Browse trending topics and content',
       icon: '🔍',
       keywords: ['twitter', 'x', 'explore', 'discover', 'trending'],
-      prefixes: ['xe'],
+      prefixes: ['!e'],
       execute: () => {
         window.location.href = 'https://x.com/explore'
       },
     },
-
     {
       id: 'x-notifications',
       type: 'action',
@@ -102,12 +99,11 @@ export const commandPaletteConfig: FlatCommandConfig = {
       description: 'View your notifications',
       icon: '🔔',
       keywords: ['twitter', 'x', 'notifications', 'alerts'],
-      prefixes: ['xn'],
+      prefixes: ['!n'],
       execute: () => {
         window.location.href = 'https://x.com/notifications'
       },
     },
-
     {
       id: 'x-messages',
       type: 'action',
@@ -115,48 +111,9 @@ export const commandPaletteConfig: FlatCommandConfig = {
       description: 'Open direct messages',
       icon: '💬',
       keywords: ['twitter', 'x', 'messages', 'dm', 'direct'],
-      prefixes: ['xm'],
+      prefixes: ['!m'],
       execute: () => {
         window.location.href = 'https://x.com/messages'
-      },
-    },
-
-    {
-      id: 'x-bookmarks',
-      type: 'action',
-      name: 'Twitter: Bookmarks',
-      description: 'View your saved bookmarks',
-      icon: '📌',
-      keywords: ['twitter', 'x', 'bookmarks', 'saved'],
-      prefixes: ['xb'],
-      execute: () => {
-        window.location.href = 'https://x.com/i/bookmarks'
-      },
-    },
-
-    {
-      id: 'x-grok',
-      type: 'action',
-      name: 'Twitter: Grok',
-      description: 'Chat with Grok AI',
-      icon: '🤖',
-      keywords: ['twitter', 'x', 'grok', 'ai'],
-      prefixes: ['xg'],
-      execute: () => {
-        window.location.href = 'https://x.com/i/grok'
-      },
-    },
-
-    {
-      id: 'x-premium',
-      type: 'action',
-      name: 'Twitter: Premium',
-      description: 'X Premium subscription',
-      icon: '⭐',
-      keywords: ['twitter', 'x', 'premium', 'verified'],
-      prefixes: ['xp'],
-      execute: () => {
-        window.location.href = 'https://x.com/i/premium'
       },
     },
   ],
@@ -169,7 +126,7 @@ export const commandPaletteConfig: FlatCommandConfig = {
       description: 'Search Twitter/X',
       icon: '🔎',
       keywords: ['twitter', 'x', 'search', 'find'],
-      prefixes: ['xs', '/'],
+      prefixes: ['xs', '!se', '/'],
       showSearchInput: false,
       render: (initialQuery: string, ctx: PortalContext) => {
         return <TwitterSearchPortal initialQuery={initialQuery} onClose={ctx.onClose} />
@@ -179,8 +136,9 @@ export const commandPaletteConfig: FlatCommandConfig = {
 }
 
 // ============================================================================
-// TWITTER SEARCH PORTAL COMPONENT
+// PORTAL COMPONENTS
 // ============================================================================
+
 function TwitterSearchPortal({
   initialQuery = '',
   onClose,

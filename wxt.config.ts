@@ -16,7 +16,7 @@ export default defineConfig({
       description: 'X-enhanced',
       version: '1.0.0',
 
-      permissions: ['tabs', 'storage', 'activeTab'],
+      permissions: ['tabs', 'storage', 'activeTab', 'cookies', 'storage'],
       host_permissions: ['<all_urls>'],
 
       action: {
@@ -59,4 +59,9 @@ export default defineConfig({
     css: { postcss: './postcss.config.js' },
     build: { target: 'esnext', minify: 'esbuild' },
   }),
+  // Development settings
+  runner: {
+    disabled: false,
+    startUrls: ['https://x.com']
+  },
 })
