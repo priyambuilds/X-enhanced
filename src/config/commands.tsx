@@ -352,7 +352,7 @@ export const commandPaletteConfig: UserCommandConfig = {
 // TWITTER/X COMMANDS
 
     {
-      id: 'tw-home',
+      id: 'x-home',
       type: 'action',
       name: 'Twitter: Home',
       description: 'Go to X home timeline',
@@ -365,7 +365,7 @@ export const commandPaletteConfig: UserCommandConfig = {
     },
 
     {
-      id: 'tw-explore',
+      id: 'x-explore',
       type: 'action',
       name: 'Twitter: Explore',
       description: 'Browse trending topics and content',
@@ -378,7 +378,7 @@ export const commandPaletteConfig: UserCommandConfig = {
     },
 
     {
-      id: 'tw-notifications',
+      id: 'x-notifications',
       type: 'action',
       name: 'Twitter: Notifications',
       description: 'View your notifications',
@@ -391,7 +391,7 @@ export const commandPaletteConfig: UserCommandConfig = {
     },
 
     {
-      id: 'tw-messages',
+      id: 'x-messages',
       type: 'action',
       name: 'Twitter: Messages',
       description: 'Open direct messages',
@@ -404,7 +404,7 @@ export const commandPaletteConfig: UserCommandConfig = {
     },
 
     {
-      id: 'tw-bookmarks',
+      id: 'x-bookmarks',
       type: 'action',
       name: 'Twitter: Bookmarks',
       description: 'View your saved bookmarks',
@@ -417,7 +417,7 @@ export const commandPaletteConfig: UserCommandConfig = {
     },
 
     {
-      id: 'tw-grok',
+      id: 'x-grok',
       type: 'action',
       name: 'Twitter: Grok',
       description: 'Chat with Grok AI',
@@ -430,7 +430,7 @@ export const commandPaletteConfig: UserCommandConfig = {
     },
 
     {
-      id: 'tw-premium',
+      id: 'x-premium',
       type: 'action',
       name: 'Twitter: Premium',
       description: 'X Premium subscription',
@@ -440,6 +440,78 @@ export const commandPaletteConfig: UserCommandConfig = {
       execute: () => {
         window.location.href = 'https://x.com/i/premium'
       },
-    }
+    },
+
+    {
+      id: 'x-search',
+      type: 'portal',
+      name: 'Twitter: Search',
+      description: 'Search Twitter/X',
+      icon: '🔎',
+      keywords: ['twitter', 'x', 'search', 'find'],
+      prefixes: ['xs', '/'],
+      showSearchInput: false,
+      render: (initialQuery: string, ctx: PortalContext) => {
+        return <TwitterSearchPortal initialQuery={initialQuery} onClose={ctx.onClose} />
+      },
+    } as unknown as Command,
   ],
 }
+
+// ============================================================================
+// TWITTER SEARCH PORTAL COMPONENT
+// ============================================================================
+function TwitterSearchPortal({
+  initialQuery = '',
+  onClose,
+}: {
+  initialQuery?: string
+  onClose?: () => void
+}) {
+  const [query, setQuery] = React.useState(initialQuery)
+
+  const handleSearch = (searchText: string) => {
+    if (!searchText.trim()) return
+    // Navigate to search with query
+    window.location.href = `https://x.com/search?q=${encodeURIComponent(searchText.trim())}`
+    onClose?.()
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch(query)
+    } else if (e.key === 'Escape') {
+      onClose?.()
+    }
+  }
+
+  return (
+    <div className="p-4 w-full">
+      <input
+        autoFocus
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyDown}
+        placeholder="Search X..."
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <div className="mt-3 flex gap-2">
+        <button
+          onClick={() => handleSearch(query)}
+          disabled={!query.trim()}
+          className="flex-1 px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
+        >
+          Search
+        </button>
+        <button
+          onClick={() => onClose?.()}
+          className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-100"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  )
+}
+
