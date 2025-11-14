@@ -1,5 +1,5 @@
 import { memo, lazy, Suspense } from 'react'
-import { commandPaletteConfig } from '@/config/commands'
+import { commandPaletteConfig, flattenCommands } from '@/config/commands'
 import { searchItems } from '@/lib/search'
 import type { Command, PortalCommand, CategoryCommand } from '@/types/types'
 import type { CommandItemData } from './CommandList'
@@ -39,7 +39,7 @@ const PortalRendererComponent = function PortalRenderer({
   store,
 }: PortalRendererProps): PortalRendererResult {
   // Get commands from config
-  const commands = commandPaletteConfig.commands || []
+  const commands = flattenCommands(commandPaletteConfig)
 
   // Find the command/portal by ID (searches nested categories recursively)
   function findCommandById(

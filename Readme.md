@@ -103,8 +103,6 @@
 
 **Implementation:** All client-side configuration with `chrome.storage.sync`.
 
-**Perfect—here's the quick reference guide for what tech to use for each feature:**
-
 ## MVP Features - Tech Stack
 
 ### 1. User Search

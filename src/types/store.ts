@@ -24,7 +24,7 @@ import type {
   FuseConfig,
   VirtualizationConfig,
 } from './types'
-import { commandPaletteConfig } from '@/config/commands'
+import { commandPaletteConfig, flattenCommands } from '@/config/commands'
 import {
   loadRecentCommands,
   saveRecentCommands,
@@ -392,7 +392,7 @@ export function createStore(
     // Find the command in our menu (searches nested categories too)
     function findCommandById(
       id: string,
-      items: any[] = commandPaletteConfig.commands || []
+      items: any[] = flattenCommands(commandPaletteConfig)
     ): any {
       for (const item of items) {
         if (item.id === id) return item

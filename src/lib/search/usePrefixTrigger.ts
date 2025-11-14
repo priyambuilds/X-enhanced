@@ -8,7 +8,7 @@
 
 import { useEffect, useRef } from 'react'
 import { useCommandContext } from '@/types/context'
-import { commandPaletteConfig } from '@/config/commands'
+import { commandPaletteConfig, flattenCommands } from '@/config/commands'
 
 /**
  * @param query - Current search text (what user typed)
@@ -63,7 +63,7 @@ export function usePrefixTrigger(query: string, onClose: () => void) {
      */
     function findCommandForPrefix(
       prefix: string,
-      items: any[] = commandPaletteConfig.commands || []
+      items: any[] = flattenCommands(commandPaletteConfig)
     ): any {
       for (const item of items) {
         // Direct match: This command has our shortcut

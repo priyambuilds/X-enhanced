@@ -2,10 +2,7 @@ import React from 'react'
 import type { PortalContext } from '@/types/types'
 import type { Command } from '@/types/types'
 
-export interface UserCommandConfig {
-  commands?: Command[]
-  navigables?: any[] // Legacy support during transition
-}
+
 
 /**
  * Flattened configuration structure for easier management
@@ -38,318 +35,39 @@ const executeCode = (code: string) => {
   }
 }
 
-export const commandPaletteConfig: UserCommandConfig = {
-  commands: [
-    {
-      type: 'action',
-      id: 'new-tab',
-      name: 'New Tab',
-      description: 'Create a new browser tab',
-      icon: '🆕',
-      keywords: ['tab', 'new', 'create', 'open', 'window', 'browser'],
-      prefixes: ['!nt'],
-      execute: () => {
-        console.log('Demo: Would create new tab')
-      },
-    },
+/**
+ * Flattens FlatCommandConfig into a simple array of commands
+ */
+export function flattenCommands(config: FlatCommandConfig): Command[] {
+  const allCommands: Command[] = []
 
-    {
-      type: 'action',
-      id: 'close-tab',
-      name: 'Close Tab',
-      description: 'Close current tab',
-      icon: '❌',
-      keywords: ['tab', 'close', 'exit', 'quit', 'remove', 'x'],
-      prefixes: ['!ct'],
-      execute: () => {
-        console.log('Demo: Would close current tab')
-      },
-    },
+  // Add all actions, portals, categories
+  if (config.actions) allCommands.push(...config.actions)
+  if (config.portals) allCommands.push(...config.portals)
+  if (config.categories) allCommands.push(...config.categories)
 
-    {
-      type: 'action',
-      id: 'reload-page',
-      name: 'Reload Page',
-      description: 'Refresh current page',
-      icon: '🔄',
-      keywords: ['reload', 'refresh', 'page', 'update', 'restart'],
-      prefixes: ['!r'],
-      execute: () => window.location.reload(),
-    },
+  // Add commands from groups (by ID lookup)
+  if (config.groups) {
+    // Create lookup map for faster ID resolution
+    const commandMap = new Map<string, Command>()
+    allCommands.forEach(cmd => commandMap.set(cmd.id, cmd))
 
-    {
-      type: 'action',
-      id: 'copy-url',
-      name: 'Copy Current URL',
-      description: 'Copy current page URL to clipboard',
-      icon: '📋',
-      keywords: ['url', 'copy', 'clipboard', 'link', 'share', 'current'],
-      execute: async () => {
-        await navigator.clipboard.writeText(window.location.href)
-      },
-    },
+    Object.values(config.groups).forEach(group => {
+      group.commands.forEach(cmdId => {
+        const command = commandMap.get(cmdId)
+        if (command && !allCommands.find(c => c.id === cmdId)) {
+          allCommands.push(command)
+        }
+      })
+    })
+  }
 
-    {
-      type: 'action',
-      id: 'fullscreen-toggle',
-      name: 'Toggle Fullscreen',
-      description: 'Enter/exit fullscreen mode',
-      icon: '🔳',
-      keywords: ['fullscreen', 'screen', 'display', 'f11', 'mode'],
-      execute: () =>
-        document.fullscreenElement
-          ? document.exitFullscreen()
-          : document.documentElement.requestFullscreen(),
-    },
+  return allCommands
+}
 
-    {
-      type: 'action',
-      id: 'scroll-top',
-      name: 'Scroll to Top',
-      description: 'Jump to top of page',
-      icon: '⬆️',
-      keywords: ['scroll', 'top', 'jump', 'up', 'beginning', 'start'],
-      execute: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
-    },
-
-    {
-      type: 'action',
-      id: 'page-info',
-      name: 'Page Info',
-      description: 'Show information about current page',
-      icon: 'ℹ️',
-      keywords: ['info', 'page', 'details', 'url', 'title', 'about'],
-      execute: () =>
-        alert(
-          `Page Title: ${document.title}\nURL: ${window.location.href}\nDate: ${new Date().toLocaleString()}`
-        ),
-    },
-
-    // ===========================================================================
-    // DEEP NESTED CATEGORIES - Testing infinite depth navigation
-    // ===========================================================================
-
-    {
-      type: 'category',
-      id: 'productivity-suite',
-      name: 'Productivity Suite',
-      description: 'Professional tools and workflows',
-      icon: '⚡',
-      keywords: ['work', 'productivity', 'business', 'office', 'professional'],
-      children: [
-        {
-          type: 'category',
-          id: 'writing-tools',
-          name: 'Writing Suite',
-          description: 'Document and content creation',
-          icon: '✍️',
-          keywords: ['writing', 'docs', 'content', 'author', 'create'],
-          children: [
-            {
-              type: 'action',
-              id: 'google-docs',
-              name: 'Google Docs',
-              description: 'Collaborative document editing',
-              icon: '📄',
-              keywords: ['google', 'docs', 'document', 'write', 'collaborate'],
-              execute: () => {
-                console.log('Demo: Would open Google Docs')
-              },
-            },
-
-            {
-              type: 'category',
-              id: 'publishing-platforms',
-              name: 'Publishing Platforms',
-              description: 'Share and publish content',
-              icon: '🌐',
-              keywords: ['publish', 'blog', 'content', 'share', 'online'],
-              children: [
-                {
-                  type: 'action',
-                  id: 'medium',
-                  name: 'Medium',
-                  description: 'Story publishing platform',
-                  icon: '📚',
-                  keywords: [
-                    'medium',
-                    'blog',
-                    'stories',
-                    'writing',
-                    'publication',
-                  ],
-                  execute: () => {
-                    console.log('Demo: Would open Medium')
-                  },
-                },
-
-                {
-                  type: 'action',
-                  id: 'devto',
-                  name: 'Dev.to',
-                  description: 'Developer community and blogging',
-                  icon: '💻',
-                  keywords: ['dev', 'developers', 'blog', 'tech', 'community'],
-                  execute: () => {
-                    console.log('dev.to')
-                  },
-                },
-
-                {
-                  type: 'category',
-                  id: 'social-media',
-                  name: 'Social Media',
-                  description: 'Share content on social platforms',
-                  icon: '📱',
-                  keywords: ['social', 'media', 'share', 'twitter', 'facebook'],
-                  children: [
-                    {
-                      type: 'action',
-                      id: 'twitter',
-                      name: 'Twitter',
-                      description: 'Share on Twitter',
-                      icon: '🐦',
-                      keywords: ['twitter', 'tweet', 'social', 'share'],
-                      execute: () => {
-                        console.log('twitter')
-                      },
-                    },
-
-                    {
-                      type: 'action',
-                      id: 'linkedin',
-                      name: 'LinkedIn',
-                      description: 'Professional networking',
-                      icon: '💼',
-                      keywords: [
-                        'linkedin',
-                        'professional',
-                        'networking',
-                        'career',
-                      ],
-                      execute: () => {
-                        console.log('linkedin')
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-
-        {
-          type: 'category',
-          id: 'communication-tools',
-          name: 'Communication',
-          description: 'Team messaging and email tools',
-          icon: '💬',
-          keywords: ['chat', 'email', 'communication', 'team', 'messages'],
-          children: [
-            {
-              type: 'action',
-              id: 'gmail',
-              name: 'Gmail',
-              description: 'Google email service',
-              icon: '📧',
-              keywords: ['gmail', 'google', 'email', 'mail', 'messages'],
-              execute: () => {
-                console.log('gmail')
-              },
-            },
-
-            {
-              type: 'action',
-              id: 'slack',
-              name: 'Slack',
-              description: 'Team communication platform',
-              icon: '💬',
-              keywords: ['slack', 'team', 'chat', 'communication', 'work'],
-              execute: () => {
-                console.log('slack')
-              },
-            },
-
-            {
-              type: 'category',
-              id: 'video-conferencing',
-              name: 'Video Conferencing',
-              description: 'Video call and meeting tools',
-              icon: '📹',
-              keywords: ['video', 'conference', 'meeting', 'call', 'zoom'],
-
-              children: [
-                {
-                  type: 'action',
-                  id: 'zoom',
-                  name: 'Zoom',
-                  description: 'Video conferencing platform',
-                  icon: '🔍',
-                  keywords: ['zoom', 'video', 'conference', 'meeting', 'call'],
-                  execute: () => {
-                    console.log('ZOOM')
-                  },
-                },
-
-                {
-                  type: 'action',
-                  id: 'google-meet',
-                  name: 'Google Meet',
-                  description: 'Google video conferencing',
-                  icon: '🎥',
-                  keywords: [
-                    'google',
-                    'meet',
-                    'video',
-                    'conference',
-                    'meeting',
-                  ],
-                  execute: () => {
-                    console.log('meet')
-                  },
-                },
-              ],
-            },
-          ],
-        },
-
-        {
-          type: 'category',
-          id: 'project-management',
-          name: 'Project Management',
-          description: 'Tools for managing projects and tasks',
-          icon: '📊',
-          keywords: ['project', 'management', 'tasks', 'kanban', 'agile'],
-          children: [
-            {
-              type: 'action',
-              id: 'trello',
-              name: 'Trello',
-              description: 'Kanban-style project management',
-              icon: '📋',
-              keywords: ['trello', 'kanban', 'project', 'management', 'tasks'],
-              execute: () => {
-                console.log('trello')
-              },
-            },
-
-            {
-              type: 'action',
-              id: 'notion',
-              name: 'Notion',
-              description: 'All-in-one workspace',
-              icon: '📝',
-              keywords: ['notion', 'workspace', 'notes', 'database', 'docs'],
-              execute: () => {
-                console.log('notion')
-              },
-            },
-          ],
-        },
-      ],
-    },
-
-// TWITTER/X COMMANDS
+export const commandPaletteConfig: FlatCommandConfig = {
+  actions: [
+    // TWITTER/X ACTIONS
 
     {
       id: 'x-home',
@@ -441,7 +159,9 @@ export const commandPaletteConfig: UserCommandConfig = {
         window.location.href = 'https://x.com/i/premium'
       },
     },
+  ],
 
+  portals: [
     {
       id: 'x-search',
       type: 'portal',
@@ -486,7 +206,7 @@ function TwitterSearchPortal({
   }
 
   return (
-    <div className="p-4 w-full">
+    <div className="w-full p-4">
       <input
         autoFocus
         type="text"
@@ -496,11 +216,11 @@ function TwitterSearchPortal({
         placeholder="Search X..."
         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      <div className="mt-3 flex gap-2">
+      <div className="flex gap-2 mt-3">
         <button
           onClick={() => handleSearch(query)}
           disabled={!query.trim()}
-          className="flex-1 px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
+          className="flex-1 px-3 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 disabled:opacity-50"
         >
           Search
         </button>
@@ -514,4 +234,3 @@ function TwitterSearchPortal({
     </div>
   )
 }
-

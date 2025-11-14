@@ -11,7 +11,7 @@ import { useSearch } from '@/lib/search'
 import { usePrefixTrigger } from '@/lib/search/usePrefixTrigger'
 import { useStoreItemsUpdater } from '@/lib'
 import { useCommandState, useRecentCommandsSection } from '@/lib'
-import { commandPaletteConfig } from '@/config/commands'
+import { commandPaletteConfig, flattenCommands } from '@/config/commands'
 import PortalRenderer from '@/components/PortalRenderer'
 import type { Command as CommandType } from '@/types/types'
 import type { CommandItemData } from '@/components/CommandList'
@@ -80,7 +80,7 @@ function AppContent({ onClose }: AppContentProps) {
     view,
     virtualizationConfig,
   } = useSearch(
-    commandPaletteConfig.commands || commandPaletteConfig.navigables || [],
+    flattenCommands(commandPaletteConfig),
     undefined,
     searchConfig
   )
