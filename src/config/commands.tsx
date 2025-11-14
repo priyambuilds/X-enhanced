@@ -348,5 +348,98 @@ export const commandPaletteConfig: UserCommandConfig = {
         },
       ],
     },
-]
+
+// TWITTER/X COMMANDS
+
+    {
+      id: 'tw-home',
+      type: 'action',
+      name: 'Twitter: Home',
+      description: 'Go to X home timeline',
+      icon: '🏠',
+      keywords: ['twitter', 'x', 'home', 'feed', 'timeline'],
+      prefixes: ['xh'],
+      execute: () => {
+        window.location.href = 'https://x.com/home'
+      },
+    },
+
+    {
+      id: 'tw-explore',
+      type: 'action',
+      name: 'Twitter: Explore',
+      description: 'Browse trending topics and content',
+      icon: '🔍',
+      keywords: ['twitter', 'x', 'explore', 'discover', 'trending'],
+      prefixes: ['xe'],
+      execute: () => {
+        window.location.href = 'https://x.com/explore'
+      },
+    },
+
+    {
+      id: 'tw-notifications',
+      type: 'action',
+      name: 'Twitter: Notifications',
+      description: 'View your notifications',
+      icon: '🔔',
+      keywords: ['twitter', 'x', 'notifications', 'alerts'],
+      prefixes: ['xn'],
+      execute: () => {
+        window.location.href = 'https://x.com/notifications'
+      },
+    },
+
+    {
+      id: 'tw-messages',
+      type: 'action',
+      name: 'Twitter: Messages',
+      description: 'Open direct messages',
+      icon: '💬',
+      keywords: ['twitter', 'x', 'messages', 'dm', 'direct'],
+      prefixes: ['xm'],
+      execute: () => {
+        window.location.href = 'https://x.com/messages'
+      },
+    },
+
+    {
+      id: 'tw-bookmarks',
+      type: 'action',
+      name: 'Twitter: Bookmarks',
+      description: 'View your saved bookmarks',
+      icon: '📌',
+      keywords: ['twitter', 'x', 'bookmarks', 'saved'],
+      prefixes: ['xb'],
+      execute: () => {
+        window.location.href = 'https://x.com/i/bookmarks'
+      },
+    },
+
+    {
+      id: 'tw-grok',
+      type: 'action',
+      name: 'Twitter: Grok',
+      description: 'Chat with Grok AI',
+      icon: '🤖',
+      keywords: ['twitter', 'x', 'grok', 'ai'],
+      prefixes: ['xg'],
+      execute: () => {
+        window.location.href = 'https://x.com/i/grok'
+      },
+    },
+
+    {
+      id: 'tw-premium',
+      type: 'action',
+      name: 'Twitter: Premium',
+      description: 'X Premium subscription',
+      icon: '⭐',
+      keywords: ['twitter', 'x', 'premium', 'verified'],
+      prefixes: ['xp'],
+      execute: () => {
+        window.location.href = 'https://x.com/i/premium'
+      },
+    }
+  ],
 }
