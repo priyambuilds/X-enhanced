@@ -1,6 +1,7 @@
 import React from 'react'
 import type { PortalContext } from '@/types/types'
 import type { Command } from '@/types/types'
+import navigationActions from './navigationCommands'
 
 
 
@@ -116,6 +117,8 @@ export const commandPaletteConfig: FlatCommandConfig = {
         window.location.href = 'https://x.com/messages'
       },
     },
+    // Deeply nested Navigation commands
+    ...navigationActions, 
   ],
 
   portals: [
