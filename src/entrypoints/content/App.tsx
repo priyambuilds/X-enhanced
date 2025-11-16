@@ -21,9 +21,9 @@ export default function App() {
     <Command
       label="Command Palette"
       modal={true}
-      className="h-[480px] flex flex-col overflow-hidden bg-white border border-gray-200 rounded-lg shadow-2xl dark:bg-gray-900 dark:border-gray-700"
+      className="h-[480px] flex flex-col overflow-hidden bg-cmd-primary rounded-cmd-xl w-cmd-container-lg border-2 border-cmd-primary"
       config={{
-        enableRecentCommands: true,
+        enableRecentCommands: false,
         loop: true,
         virtualization: false, // Enable virtualization for performance
         virtualizationConfig: {
@@ -79,11 +79,7 @@ function AppContent({ onClose }: AppContentProps) {
     recentCommandObjects,
     view,
     virtualizationConfig,
-  } = useSearch(
-    flattenCommands(commandPaletteConfig),
-    undefined,
-    searchConfig
-  )
+  } = useSearch(flattenCommands(commandPaletteConfig), undefined, searchConfig)
 
   // Extract virtualization settings for easier access
   const isVirtualizationEnabled = virtualizationConfig?.enabled || false
@@ -149,8 +145,8 @@ function AppContent({ onClose }: AppContentProps) {
   return (
     <>
       {/* Header area - fully customizable by users */}
-      <div className="border-b border-gray-200 dark:border-gray-700">
-        <div className="flex items-center p-4">
+      <div className="p-4 p-y-2 flex flex-row flex-nowrap items-center items- border-b border-cmd-secondary h-cmd-item">
+        <div className="flex items-center">
           {/* Back button - only show when not in root view */}
           {view.type !== 'root' && (
             <BackButton className="flex items-center gap-2 mr-3 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
@@ -161,24 +157,11 @@ function AppContent({ onClose }: AppContentProps) {
 
           {/* Search input area - conditionally visible based on view settings */}
           {view.showSearchInput !== false && (
-            <div className="relative flex-1">
-              <svg
-                className="absolute left-0 w-4 h-4 text-gray-400 transform -translate-y-1/2 top-1/2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
+            <div className="flex flex-1 gap-2 text-cmd-base text-cmd-secondary font-cmd-medium">
               <CommandInput
                 placeholder="Type a command or search..."
                 autoFocus
-                className="w-full pl-6 text-gray-900 placeholder-gray-500 bg-transparent outline-none dark:text-gray-100 dark:placeholder-gray-400"
+                className="w-full "
               />
             </div>
           )}
@@ -193,11 +176,7 @@ function AppContent({ onClose }: AppContentProps) {
             renderItem={(cmd: CommandItemData) => {
               // Handle section header
               if (cmd.id === 'recent-commands-header') {
-                return (
-                  <div className="px-4 py-2 text-xs font-semibold tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                    {cmd.name}
-                  </div>
-                )
+                return <div className="">{cmd.name}</div>
               }
 
               // Handle section divider
@@ -215,19 +194,19 @@ function AppContent({ onClose }: AppContentProps) {
                   value={cmd.id}
                   keywords={cmd.keywords || []}
                   onSelect={cmd.onSelect}
-                  className={`flex items-center gap-4 px-4 py-3 text-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 active:bg-blue-50 active:dark:bg-blue-600/20 ${isItemActive ? 'bg-blue-100 dark:bg-blue-900/30 ring-2 ring-blue-500' : ''}`}
+                  className={`h-cmd-item flex items-center gap-cmd-3 px-cmd-4 cursor-pointer hover:bg-cmd-secondary transition-cmd-base ${isItemActive ? 'bg-cmd-tertiary' : ''}`}
                   isActive={isItemActive}
                 >
-                  <div className="flex items-center flex-1 gap-4">
-                    <span className="text-lg shrink-0 opacity-70">
+                  <div className="flex items-center flex-1 gap-cmd-3 min-w-0">
+                    <span className="text-cmd-lg shrink-0 opacity-70">
                       {cmd.icon || '➡️'}
                     </span>
                     <div className="flex-1 min-w-0">
-                      <div className="text-base leading-tight text-gray-900 dark:text-gray-100">
+                      <div className="text-cmd-base font-cmd-bold text-cmd-primary truncate">
                         {cmd.name}
                       </div>
                       {cmd.description && (
-                        <div className="text-sm leading-tight text-gray-500 truncate dark:text-gray-400">
+                        <div className="text-cmd-sm text-cmd-secondary truncate">
                           {cmd.description}
                         </div>
                       )}

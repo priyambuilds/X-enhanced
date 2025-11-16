@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import '@/styles/styles.css'
+import './styles.css'
 
 export default defineContentScript({
   matches: ['<all_urls>'],
@@ -11,6 +11,8 @@ export default defineContentScript({
     const ui = await createShadowRootUi(ctx, {
       name: 'command-palette',
       position: 'inline',
+      anchor: 'body',
+      append: 'first',
       onMount: container => {
         // Mount React app
         const root = ReactDOM.createRoot(container)

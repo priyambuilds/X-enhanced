@@ -39,7 +39,7 @@ const CommandItemComponent = function CommandItem({
       data-active={isActive ? '' : undefined}
       tabIndex={-1} // Prevent tab focus - input should always be focused
       onClick={handleClick}
-      className={`${className} ${isActive ? 'bg-blue-100 dark:bg-blue-900/30 ring-2 ring-blue-500' : ''}`}
+      className={`${className} ${isActive}`}
     >
       {children}
     </div>

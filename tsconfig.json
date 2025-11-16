@@ -33,7 +33,7 @@
       "@/utils/*": ["src/utils/*"],
       "@/types/*": ["src/types/*"],
       "@/lib/*": ["src/lib/*"],
-      "@/styles/*": ["src/styles*"]
+      "@/styles/*": ["src/entrypoints/content/styles.css*"]
     },
 
     /* Types: add Chrome + webextension and WXT auto-imports */

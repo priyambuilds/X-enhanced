@@ -1,8 +1,6 @@
-import React from 'react'
 import type { PortalContext } from '@/types/types'
 import type { Command } from '@/types/types'
-
-
+import UserSearchPortal from './components/userSearchPortal'
 
 /**
  * Flattened configuration structure for easier management
@@ -120,75 +118,21 @@ export const commandPaletteConfig: FlatCommandConfig = {
 
   portals: [
     {
-      id: 'x-search',
+      id: 'x-user-search',
       type: 'portal',
-      name: 'Twitter: Search',
-      description: 'Search Twitter/X',
+      name: 'Search X Users',
+      description: 'Search for users on X (Twitter)',
       icon: '🔎',
-      keywords: ['twitter', 'x', 'search', 'find'],
-      prefixes: ['xs', '!se', '/'],
-      showSearchInput: false,
+      keywords: ['search', 'users', 'people', 'x', 'twitter', 'find', 'user'],
+      prefixes: ['@', 'user', 'search'], // Trigger with @username or "search"
+      showSearchInput: false, // Portal has its own search input
       render: (initialQuery: string, ctx: PortalContext) => {
-        return <TwitterSearchPortal initialQuery={initialQuery} onClose={ctx.onClose} />
+        return (
+          <UserSearchPortal initialQuery={initialQuery} onClose={ctx.onClose} />
+        )
       },
     } as unknown as Command,
   ],
 }
 
-// ============================================================================
 // PORTAL COMPONENTS
-// ============================================================================
-
-function TwitterSearchPortal({
-  initialQuery = '',
-  onClose,
-}: {
-  initialQuery?: string
-  onClose?: () => void
-}) {
-  const [query, setQuery] = React.useState(initialQuery)
-
-  const handleSearch = (searchText: string) => {
-    if (!searchText.trim()) return
-    // Navigate to search with query
-    window.location.href = `https://x.com/search?q=${encodeURIComponent(searchText.trim())}`
-    onClose?.()
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleSearch(query)
-    } else if (e.key === 'Escape') {
-      onClose?.()
-    }
-  }
-
-  return (
-    <div className="w-full p-4">
-      <input
-        autoFocus
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder="Search X..."
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <div className="flex gap-2 mt-3">
-        <button
-          onClick={() => handleSearch(query)}
-          disabled={!query.trim()}
-          className="flex-1 px-3 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 disabled:opacity-50"
-        >
-          Search
-        </button>
-        <button
-          onClick={() => onClose?.()}
-          className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-100"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  )
-}

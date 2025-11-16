@@ -1,9 +1,57 @@
+```css
+/* globals.css */
+
+@layer components {
+  .cmd-container {
+    @apply bg-cmd-bg-primary rounded-cmd-xl shadow-cmd-lg w-cmd-container;
+  }
+
+  .cmd-header {
+    @apply border-b border-cmd-border-primary px-cmd-4 py-cmd-3;
+  }
+
+  .cmd-input {
+    @apply h-cmd-input text-cmd-base text-cmd-text-primary 
+           placeholder-cmd-text-secondary bg-transparent outline-none;
+  }
+
+  .cmd-item {
+    @apply flex items-center gap-cmd-3 px-cmd-4 h-cmd-item
+           hover:bg-cmd-bg-secondary active:bg-cmd-bg-secondary
+           border-b border-cmd-border-primary last:border-b-0
+           transition-colors duration-cmd-base cursor-pointer;
+  }
+
+  .cmd-item-active {
+    @apply bg-cmd-bg-secondary;
+  }
+
+  .cmd-avatar {
+    @apply w-cmd-avatar h-cmd-avatar rounded-full flex-shrink-0;
+  }
+
+  .cmd-text-primary {
+    @apply text-cmd-base font-cmd-bold text-cmd-text-primary leading-5;
+  }
+
+  .cmd-text-secondary {
+    @apply text-cmd-base text-cmd-text-secondary leading-5 truncate;
+  }
+
+  .cmd-divider {
+    @apply border-t border-cmd-border-primary;
+  }
+
+  .cmd-icon {
+    @apply w-cmd-icon h-cmd-icon text-cmd-text-secondary;
+  }
+}
+```
+
 ```tsx
 import React from 'react'
 import type { PortalContext } from '@/types/types'
 import type { Command } from '@/types/types'
-
-
 
 /**
  * Flattened configuration structure for easier management
@@ -190,7 +238,12 @@ export const commandPaletteConfig: FlatCommandConfig = {
       prefixes: ['xs', '!se', '/'],
       showSearchInput: false,
       render: (initialQuery: string, ctx: PortalContext) => {
-        return <TwitterSearchPortal initialQuery={initialQuery} onClose={ctx.onClose} />
+        return (
+          <TwitterSearchPortal
+            initialQuery={initialQuery}
+            onClose={ctx.onClose}
+          />
+        )
       },
     } as unknown as Command,
 
@@ -204,7 +257,9 @@ export const commandPaletteConfig: FlatCommandConfig = {
       prefixes: ['calc'],
       showSearchInput: false,
       render: (initialQuery: string, ctx: PortalContext) => {
-        return <CalculatorPortal initialQuery={initialQuery} onClose={ctx.onClose} />
+        return (
+          <CalculatorPortal initialQuery={initialQuery} onClose={ctx.onClose} />
+        )
       },
     } as unknown as Command,
 
@@ -218,7 +273,9 @@ export const commandPaletteConfig: FlatCommandConfig = {
       prefixes: ['txt'],
       showSearchInput: false,
       render: (initialQuery: string, ctx: PortalContext) => {
-        return <TextUtilsPortal initialQuery={initialQuery} onClose={ctx.onClose} />
+        return (
+          <TextUtilsPortal initialQuery={initialQuery} onClose={ctx.onClose} />
+        )
       },
     } as unknown as Command,
   ],
@@ -445,7 +502,7 @@ function TwitterSearchPortal({
         autoFocus
         type="text"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={e => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="Search X..."
         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -504,7 +561,7 @@ function CalculatorPortal({
           autoFocus
           type="text"
           value={expression}
-          onChange={(e) => setExpression(e.target.value)}
+          onChange={e => setExpression(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Enter mathematical expression..."
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -560,7 +617,7 @@ function TextUtilsPortal({
       <textarea
         autoFocus
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={e => setText(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="Enter text to process..."
         rows={4}
@@ -597,3 +654,4 @@ function TextUtilsPortal({
     </div>
   )
 }
+```
