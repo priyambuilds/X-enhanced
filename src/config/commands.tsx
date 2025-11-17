@@ -67,55 +67,8 @@ export function flattenCommands(config: FlatCommandConfig): Command[] {
 
 export const commandPaletteConfig: FlatCommandConfig = {
   actions: [
-    // TWITTER/X ACTIONS
-    {
-      id: 'x-home',
-      type: 'action',
-      name: 'Twitter: Home',
-      description: 'Go to X home timeline',
-      icon: '🏠',
-      keywords: ['twitter', 'x', 'home', 'feed', 'timeline'],
-      prefixes: ['!h'],
-      execute: () => {
-        window.location.href = 'https://x.com/home'
-      },
-    },
-    {
-      id: 'x-explore',
-      type: 'action',
-      name: 'Twitter: Explore',
-      description: 'Browse trending topics and content',
-      icon: '🔍',
-      keywords: ['twitter', 'x', 'explore', 'discover', 'trending'],
-      prefixes: ['!e'],
-      execute: () => {
-        window.location.href = 'https://x.com/explore'
-      },
-    },
-    {
-      id: 'x-notifications',
-      type: 'action',
-      name: 'Twitter: Notifications',
-      description: 'View your notifications',
-      icon: '🔔',
-      keywords: ['twitter', 'x', 'notifications', 'alerts'],
-      prefixes: ['!n'],
-      execute: () => {
-        window.location.href = 'https://x.com/notifications'
-      },
-    },
-    {
-      id: 'x-messages',
-      type: 'action',
-      name: 'Twitter: Messages',
-      description: 'Open direct messages',
-      icon: '💬',
-      keywords: ['twitter', 'x', 'messages', 'dm', 'direct'],
-      prefixes: ['!m'],
-      execute: () => {
-        window.location.href = 'https://x.com/messages'
-      },
-    },
+  
+    
     // Deeply nested Navigation commands
     ...navigationActions,
   ],

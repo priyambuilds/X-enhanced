@@ -1,3 +1,6 @@
+Click [Command Guide](./TWITTER_COMMANDS.md) to Save time and Use Twitter like an Elite!!
+
+
 Search is the main feature:
 What are the things that can be searched?
 1. users
@@ -29,7 +32,7 @@ Example-
 ![alt text](image.png)
 Navigation will be the only feature that is not categorized inside a portal. Meaning it can be searched in the root view.
 ![alt text](image-1.png)
-raycast is a good example here. It does has things categorized, and the items of the categories are displayed in the root search too. This feature is already in the library,
+raycast is a good example here. It does has things categorized, and the items of the categories are displayed in the root search too. This feature is already in the library, (Create and Settings navigation are pending)
 
 3. DM search:
 **Feautue 1**
