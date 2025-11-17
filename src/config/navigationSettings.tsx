@@ -1,6 +1,6 @@
 import type { Command } from '@/types/types'
 
-const settingsActions: Command[] = [
+const settingsNavigations: Command[] = [
   // Create post
   {
     id: 'x-compose-post',
@@ -390,4 +390,4 @@ const settingsActions: Command[] = [
   },
 ]
 
-export default settingsActions
+export default settingsNavigations

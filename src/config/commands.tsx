@@ -1,6 +1,8 @@
 import type { PortalContext } from '@/types/types'
 import type { Command } from '@/types/types'
+
 import navigationActions from './navigationCommands'
+import settingsNavigations from './navigationSettings'
 
 import UserSearchPortal from './components/userSearchPortal'
 
@@ -71,6 +73,7 @@ export const commandPaletteConfig: FlatCommandConfig = {
     
     // Deeply nested Navigation commands
     ...navigationActions,
+    ...settingsNavigations
   ],
 
   portals: [
