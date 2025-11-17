@@ -186,4 +186,81 @@ These commands use example handles; replace `{USER}` or the example handle with 
 
 ---
 
+---
+
+## Settings Commands
+
+### Compose
+
+| Command | Prefix | Icon | Description | URL |
+|---------|--------|------|-------------|-----|
+| Compose Post | `!xcomposepost` | ✏️ | Create a new post | https://x.com/compose/post |
+
+### Account Settings
+
+| Command | Prefix | Icon | Description | URL |
+|---------|--------|------|-------------|-----|
+| Account Settings | `!xsettingsaccount` | 👤 | Manage account information and email | https://x.com/settings/account |
+| Your Twitter Data | `!xsettingsdata` | 📊 | View your Twitter account data | https://x.com/settings/your_twitter_data/account |
+| Password Settings | `!xsettingspassword` | 🔐 | Change your password | https://x.com/settings/password |
+| Download Your Data | `!xdownloaddata` | ⬇️ | Download your account data archive | https://x.com/settings/download_your_data |
+| Deactivate Account | `!xdeactivate` | ⚠️ | Deactivate or delete your account | https://x.com/settings/deactivate |
+
+### Monetization & Premium
+
+| Command | Prefix | Icon | Description | URL |
+|---------|--------|------|-------------|-----|
+| Manage Subscriptions | `!xmanagesubscriptions` | 💳 | Manage your subscriptions and memberships | https://x.com/settings/manage_subscriptions |
+
+### Security & Account Access
+
+| Command | Prefix | Icon | Description | URL |
+|---------|--------|------|-------------|-----|
+| Security Settings | `!xsettingssecurity` | 🔒 | Manage two-factor authentication and login alerts | https://x.com/settings/security |
+| Apps and Sessions | `!xsettingsapps` | 📱 | Manage connected apps and active sessions | https://x.com/settings/apps_and_sessions |
+| Connected Accounts | `!xconnectedaccounts` | 🔗 | Manage connected social accounts | https://x.com/settings/connected_accounts |
+| Delegate | `!xsettingsdelegate` | 👥 | Manage account delegates | https://x.com/settings/delegate |
+
+### Privacy & Safety
+
+| Command | Prefix | Icon | Description | URL |
+|---------|--------|------|-------------|-----|
+| Audience and Tagging | `!xaudience` | 👁️ | Control who can tag you and see your account | https://x.com/settings/audience_and_tagging |
+| Your Tweets | `!xyourtweets` | 🗣️ | Control who can reply to and retweet your posts | https://x.com/settings/your_tweets |
+| Content You See | `!xcontent` | 🔍 | Control search results and content filters | https://x.com/settings/content_you_see |
+| Mute and Block | `!xmuteblock` | 🚫 | Manage muted and blocked accounts | https://x.com/settings/mute_and_block |
+| Direct Messages | `!xdmsettings` | 💌 | Control direct message settings | https://x.com/settings/direct_messages |
+| Spaces Settings | `!xspacessettings` | 🎙️ | Control who can invite you to Spaces | https://x.com/settings/spaces |
+| Contacts | `!xcontacts` | 📇 | Manage contact sync and imports | https://x.com/settings/contacts |
+| About Your Account | `!xabout` | ℹ️ | View account information and privacy details | https://x.com/settings/about_your_account |
+
+### Data Sharing & Personalization
+
+| Command | Prefix | Icon | Description | URL |
+|---------|--------|------|-------------|-----|
+| Ads Preferences | `!xadsprefs` | 📢 | Manage personalized ad settings | https://x.com/settings/ads_preferences |
+| Off-Twitter Activity | `!xofftwitter` | 🌐 | Control off-platform data sharing | https://x.com/settings/off_twitter_activity |
+| Data Sharing with Partners | `!xdatasharing` | 🤝 | Manage data sharing with business partners | https://x.com/settings/data_sharing_with_business_partners |
+| Location Information | `!xlocation` | 📍 | Control location data collection | https://x.com/settings/location_information |
+| Grok Settings | `!xgroksets` | 🤖 | Configure Grok AI preferences | https://x.com/settings/grok_settings |
+
+### Notifications
+
+| Command | Prefix | Icon | Description | URL |
+|---------|--------|------|-------------|-----|
+| Notification Filters | `!xnotiffilters` | 🔔 | Filter notifications by type | https://x.com/settings/notifications/filters |
+| Notification Preferences | `!xnotifprefs` | 📲 | Manage notification delivery and frequency | https://x.com/settings/notifications/preferences |
+
+### Accessibility & Display
+
+| Command | Prefix | Icon | Description | URL |
+|---------|--------|------|-------------|-----|
+| Accessibility | `!xaccessibility` | ♿ | Accessibility features and options | https://x.com/settings/accessibility |
+| Display Settings | `!xdisplay` | 🎨 | Customize theme, text size, and appearance | https://x.com/settings/display |
+| Languages | `!xlanguages` | 🌍 | Select your preferred language | https://x.com/settings/languages |
+| Data Settings | `!xdatasettings` | 💾 | Manage data usage and storage | https://x.com/settings/data |
+| Keyboard Shortcuts | `!xkeyboard` | ⌨️ | View and manage keyboard shortcuts | https://x.com/i/keyboard_shortcuts |
+
+---
+
 If you'd like, I can also generate a printable cheatsheet (PDF) or add these commands as named exports for easier imports in code.
